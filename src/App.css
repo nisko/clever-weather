@@ -1,38 +1,42 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  display: flex;
+  background-color: rgb(10, 10, 10);
+  color: white;
   min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+}
+
+.userForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 90%;
 }
 
-.App-link {
-  color: #61dafb;
+.userForm input, button {
+  min-width: 50%;
+  max-width: 500px;
+  padding: 0;
+  margin: 2em 0;
+  font-size: 1.5em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.errorText {
+  color: red;
+  font-size: 1.5em;
+}
+
+.forecastTable {
+  font-size: 1.5em;
+  min-width: 70vw;
+}
+
+.forecastTable tr {
+  height: 50px;
+}
+
+.forecastTable td {
+  width: 33%;
 }
