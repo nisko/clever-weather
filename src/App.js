@@ -1,35 +1,38 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import strConst from './Constants';
-import { generateDateStringsArr } from './Helpers';
+import { generateDateStringsArr, parseForecastData, adviceGenerator } from './Helpers';
 import './App.css';
 
 function App() {
-  const [name, setName] = useState();
-  const [city, setCity] = useState();
-  const [countryCode, setCountryCode] = useState();
-  const [stateName, setStateName] = useState();
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [countryCode, setCountryCode] = useState('');
+  const [stateName, setStateName] = useState('');
   const [forecast, setForecast] = useState();
   const [isForecast, setIsForecast] = useState(false);
+  const [advice, setAdvice] = useState();
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState();
+
   const onGetForecast = async () => {
     try {
       let geoData = city;
-      if (stateName !== undefined){
+      if (stateName){
         geoData = geoData.concat(',', stateName);
       };
-      if (countryCode !== undefined){
+      if (countryCode){
         geoData = geoData.concat(',', countryCode);
       }
-      const res = await axios.get("https://api.openweathermap.org/data/2.5/forecast", {params: {
+      const res = await axios.get(strConst.baseUrl, {params: {
         q: geoData,
-        APPID: "323c6142310afa9402e3214b3c14d68e",
-        units: "metric",
-        lang: "ru"
+        APPID: strConst.reqParams.APPID,
+        units: strConst.reqParams.units,
+        lang: strConst.reqParams.lang,
       }});
-      const data = res.data.list.slice(0, 8);
-      setForecast(data);
+      const parsedData = parseForecastData(res.data.list);
+      setForecast(parsedData);
+      setAdvice(adviceGenerator(parsedData));
       setIsForecast(true);
       setIsError(false);
     }
@@ -44,10 +47,13 @@ function App() {
       }
     }
   };
+
   const onNewForecast = () => {
     setIsForecast(false);
   };
+
   const dateStringArr = generateDateStringsArr();
+
   return (
     <div className="App">
       <h1>{strConst.welcome}</h1>
@@ -62,15 +68,17 @@ function App() {
         </div>
       ) : (
         <>
-          <h2>{`${strConst.hello}, ${name === undefined ? strConst.anonymous : name}. ${strConst.forecastText} ${city}`}</h2>
+          <h2>{`${strConst.hello}, ${name.length === 0 ? strConst.anonymous : name}. ${strConst.forecastText} ${city}`}</h2>
+          <p className="adviceText">{advice}</p>
           <table className="forecastTable">
             <tbody>
               {forecast.map((item, index) => {
                 return (
                 <tr key={index}>
                   <td>{dateStringArr[index]}</td>
-                  <td>{Math.round(item.main.temp)}&deg;</td>
-                  <td>{item.weather[0].description}</td>
+                  <td>{`${strConst.temperature}: ${item.temp}`}&deg;</td>
+                  <td>{`${strConst.windSpeed}: ${item.wind}${strConst.unit}`}</td>
+                  <td>{item.description}</td>
                 </tr>
               )})}
             </tbody>

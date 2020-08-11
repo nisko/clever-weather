@@ -12,15 +12,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 100%;
 }
 
 .userForm input, button {
-  min-width: 50%;
-  max-width: 500px;
+  width: min(650px, 90%);
   padding: 0;
   margin: 2em 0;
   font-size: 1.5em;
+}
+
+.adviceText {
+  font-size: 1.5em;
+  max-width: 70vw;
+  text-align: center;
 }
 
 .errorText {
@@ -38,5 +43,5 @@
 }
 
 .forecastTable td {
-  width: 33%;
+  width: 25%;
 }
