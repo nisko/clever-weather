@@ -16,6 +16,11 @@ function App() {
   const [errorText, setErrorText] = useState();
 
   const onGetForecast = async () => {
+    if (city.length === 0){
+      setIsError(true);
+      setErrorText(strConst.cityRequiredError);
+      return;
+    };
     try {
       let geoData = city;
       if (stateName){

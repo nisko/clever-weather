@@ -9,6 +9,7 @@ const strConst = {
   responseErrorText: "Прогноз для заданной местности не найден",
   requestErrorText: "Не удалось получить ответ от сервиса",
   unknownErrorText: "Неизвестная ошибка",
+  cityRequiredError: "Необходимо указать название города",
   hello: "Привет",
   anonymous: "Аноним",
   forecastText: "Вот прогноз погоды на следующие сутки в городе",

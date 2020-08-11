@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Задача умный сервис прогноза погоды.
 
-## Available Scripts
+Уровень сложности "Задача со звездочкой".
 
-In the project directory, you can run:
+Для разработки использован reactjs. Сервис реализован в виде сайта.
 
-### `npm start`
+На данном сервисе пользователь может узнать прогноз погоды в выбранном городе, а также получить совет, что надеть.
+Ответ полученный от API выводится на экране в виде таблицы с полями: время, температура, скорость ветра, информация об осадках.
+Выводятся данные о погоде в следующие 24 часы с интервалом в три часа (всего в таблице 8 строк).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![Output sample](https://github.com/nisko/clever-weather/raw/master/demo.gif)
 
-### `npm test`
+Процесс работы программы:
+1. Пользователь заполняет форму, в которой всего 4 поля: имя, город, код страны, штат. Обязательно заполнить только город.
+Для избежания неоднозначности при получении информации о погоде в выбранном городе рекомендуется указать код страны по стандарту ISO 3166,
+а для США указать штат.
+2. После заполнения формы пользователь нажимает кнопку "Показать прогноз". Далее проходит валидация данных.
+Если город не указан выводится ошибка. Если город указан, то отправляется запрос к API.
+3. Если запрос к API завершился с ошибкой, то выводится на экран текст ошибки.
+Если запрос завершился корректно, то выводятся данные о погоде в заданном городе и совет, что надеть при текущей погоде.
+Совет генерируется в зависимости от средней температуры в течении суток и наличия осадков.
+4. Пользователь ознакомившись с данными о погоде может нажать кнопку "Новый прогноз" и получить новый прогноз.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Порядок запуска программы
+0. для запуска необходимо установить nodejs, npm и git.
+1. git clone https://github.com/nisko/clever-weather (скопировать репозиторий с github)
+2. cd nisko-weather (перейти в директорию nisko-weather)
+3. npm install (установить зависимости)
+4. npm start (запуск приложения)
